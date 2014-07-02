@@ -34,23 +34,20 @@ STATUS_RE = re.compile(
 EXCEPT_RE = re.compile(
     '(?:\s+\[junit\] )?(Exception in |\tat \w+|Caused by: )')
 
-RED = "\033[1;31m%s\033[0m"
-GREEN = "\033[1;32m%s\033[0m"
-YELLOW = "\033[1;33m%s\033[0m"
+ERROR_COLOR = "\033[1;34m%s\033[0m"
+EXCEPTION_COLOR = "\033[1;37m%s\033[0m"
 
 def colorize(line):
     match = STATUS_RE.match(line)
     if match:
         (failures, errors) = match.groups()
         if (int(failures)) > 0 or (int(errors) > 0):
-            sys.stdout.write(RED % line)
-        else:
-            sys.stdout.write(GREEN % line)
+            sys.stdout.write(ERROR_COLOR % line)
         return True
     
     match = EXCEPT_RE.match(line)
     if match:
-        sys.stdout.write(YELLOW % line)
+        sys.stdout.write(EXCEPTION_COLOR % line)
         return True
         
     return False
