@@ -43,7 +43,7 @@ def colorize(line):
         (failures, errors) = match.groups()
         if (int(failures)) > 0 or (int(errors) > 0):
             sys.stdout.write(ERROR_COLOR % line)
-        else 
+        else:
             sys.stdout.write(line)
         return True
     
